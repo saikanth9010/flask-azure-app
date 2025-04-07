@@ -20,6 +20,7 @@ steps:
   displayName: 'Install Python dependencies'
 
 - script: |
+    export PYTHONPATH=$(System.DefaultWorkingDirectory)
     pytest tests/
   displayName: 'Run Unit Tests'
 
