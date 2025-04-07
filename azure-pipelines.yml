@@ -10,9 +10,9 @@ variables:
   pythonVersion: '3.10'
 
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(pythonVersion)'
+# - task: UsePythonVersion@0
+#   inputs:
+#     versionSpec: '$(pythonVersion)'
 
 - script: |
     python -m pip install --upgrade pip
