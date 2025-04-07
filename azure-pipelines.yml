@@ -27,6 +27,6 @@ steps:
 - task: AzureWebApp@1
   displayName: 'Deploy to Azure Web App'
   inputs:
-    azureSubscription: 'Azure Subscription 1'      # 👈 Must match your service connection name exactly
+    azureSubscription: 'azure-flask-fp'      # 👈 Must match your service connection name exactly
     appName: '$(azureWebAppName)'            # 👈 Matches the variable you defined at top
     package: '$(System.DefaultWorkingDirectory)/app.zip'
