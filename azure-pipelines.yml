@@ -20,6 +20,10 @@ steps:
   displayName: 'Install Python dependencies'
 
 - script: |
+    pytest tests/
+  displayName: 'Run Unit Tests'
+
+- script: |
     zip -r app.zip *
   displayName: 'Zip app files'
 
