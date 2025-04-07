@@ -1,0 +1,30 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureWebAppName: 'flask-azure-webapp'
+  azureResourceGroup: 'flask-rg'
+  pythonVersion: '3.10'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(pythonVersion)'
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install Python dependencies'
+
+- script: |
+    zip -r app.zip *
+  displayName: 'Zip app files'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'azure-flask-sp'
+    appName: '$(azureWebAppName)'
+    package: 'app.zip'
