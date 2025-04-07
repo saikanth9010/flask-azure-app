@@ -29,4 +29,4 @@ steps:
   inputs:
     azureSubscription: 'azure-flask-fp'      # 👈 Must match your service connection name exactly
     appName: '$(azureWebAppName)'            # 👈 Matches the variable you defined at top
-    package: '$(System.DefaultWorkingDirectory)/app.zip'
+    package: 'app.zip'
