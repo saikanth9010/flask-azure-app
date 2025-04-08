@@ -47,7 +47,7 @@ steps:
 - task: AzureCLI@2
   displayName: 'Swap Slots: Staging to Production'
   inputs:
-    azureSubscription: 'azure-flask-sp'
+    azureSubscription: 'azure-flask-fp'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
