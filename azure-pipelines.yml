@@ -29,9 +29,30 @@ steps:
   displayName: 'Zip app files'
 
 
+# - task: AzureWebApp@1
+#   displayName: 'Deploy to Azure Web App'
+#   inputs:
+#     azureSubscription: 'azure-flask-fp'      # 👈 Must match your service connection name exactly
+#     appName: '$(azureWebAppName)'            # 👈 Matches the variable you defined at top
+#     package: 'app.zip'
+
 - task: AzureWebApp@1
-  displayName: 'Deploy to Azure Web App'
+  displayName: 'Deploy to Staging Slot'
   inputs:
-    azureSubscription: 'azure-flask-fp'      # 👈 Must match your service connection name exactly
-    appName: '$(azureWebAppName)'            # 👈 Matches the variable you defined at top
+    azureSubscription: 'azure-flask-fp'  # Your service connection name
+    appName: 'flask-azure-webapp'        # Your app name
+    slotName: 'staging'                  # ✅ Add this to target staging
     package: 'app.zip'
+
+- task: AzureCLI@2
+  displayName: 'Swap Slots: Staging to Production'
+  inputs:
+    azureSubscription: 'azure-flask-sp'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az webapp deployment slot swap \
+        --resource-group flask-rg \
+        --name flask-azure-webapp \
+        --slot staging \
+        --target-slot production
