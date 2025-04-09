@@ -44,7 +44,7 @@ steps:
     slotName: 'staging'                  # ✅ Add this to target staging
     package: 'app.zip'
 
-- task: AzureCLI@2
+- task: AzureCLI@2  #new task for 
   displayName: 'Swap Slots: Staging to Production'
   inputs:
     azureSubscription: 'azure-flask-fp'
