@@ -58,17 +58,16 @@ steps:
         --slot staging \
         --target-slot production
 
-
-        - task: AzureCLI@2
-        displayName: 'Rollback: Revert Staging to Prod'
-        condition: failed()  # ⛔ Runs ONLY if above tasks fail
-        inputs:
-          azureSubscription: 'azure-flask-fp'
-          scriptType: 'bash'
-          scriptLocation: 'inlineScript'
-          inlineScript: |
-            az webapp deployment slot swap \
-              --resource-group $(azureResourceGroup) \
-              --name $(azureWebAppName) \
-              --slot production \
-              --target-slot staging
+- task: AzureCLI@2
+  displayName: 'Rollback: Revert Staging to Prod'
+  condition: failed()  # ⛔ Runs ONLY if above tasks fail
+  inputs:
+    azureSubscription: 'azure-flask-fp'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az webapp deployment slot swap \
+        --resource-group $(azureResourceGroup) \
+        --name $(azureWebAppName) \
+        --slot production \
+        --target-slot staging
