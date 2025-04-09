@@ -42,7 +42,7 @@ steps:
     azureSubscription: 'azure-flask-fp'  # Your service connection name
     appName: 'flask-azure-webapp'        # Your app name
     slotName: 'staging'                  # ✅ Add this to target staging
-    package: 'app.zip'
+    package: '$(System.DefaultWorkingDirectory)/app.zip'
 
 - task: AzureCLI@2  #new task for 
   displayName: 'Swap Slots: Staging to Production'
